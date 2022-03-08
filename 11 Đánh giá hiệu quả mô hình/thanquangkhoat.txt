@@ -1,0 +1,137 @@
+Evaluation of empirical results - Đánh giá kết quả thực nghiệm
+
+Trong quá trình học đã học được các mô hình học có giám sát và không giám sát.
+
+Khi ta sử dụng mô hình để giải quyết bài toán: thì sẽ phải chọn các tham số cho mô hình làm sao cho mô hình khái quát hoá tốt nhất dữ liệu ta cho nó học hỏi.
+
+Vậy làm sao để chọn được tham số và đánh giá một mô hình là khái quát hoá đủ tốt để sử dụng?
+
+1. Assessing performance - Đánh giá hiệu suất
+How can we make a reliable asessment on the performance of an ML method?
+Thường chúng ta có thể cải thiện mô hình bằng cách sử dụng thêm nhiều dữ liệu
+
+How to choose a good value for a parameter in an ML method?
+The performance of method depend ons many factor:
+- cỡ dữ liệu, dữ liệu mô tả không gian tập dữ liệu như thế nào, Phân bố các lớp
+- Nhiễu lỗi trong dữ liệu
+
+Có 2 cách đánh giá hiệu quả phương pháp: đánh giá mặt lý thuyết + đánh giá bằng cách thực nghiệm
+
+*Đánh giá lý thuyết (Theoretical evaluation)
+- tốc độ học phương pháp hội tụ nhanh hay chậm
+- bao nhiêu dữ liệu là đủ cho phương pháp A
+- Độ chính xác trung bình 1 phương pháp
+- Một phương pháp chống được lỗi xảy ra không
+=> Chuyên gia, nhà khoa học nghiên cứu sâu về mô hình
+*Cách đánh giá thực nghiệm:
+- Quan sát hiệu quả phương pháp trong thực tế sử bằng cách sử dụng 1 hoặc vài tập dữ liệu và một độ đo hiệu quả, sau đó dùng nhiều thử nghiệm rồi tổng hợp lại từ thử nghiệm ấy rồi đưa ra đánh giá chung từ phương pháp ấy
+
+Trong bài thì sẽ bàn luận đánh giá thực nghiệm nó là như thế nào:
+=======================
+ĐÁNH GIÁ THỰC NGHIỆM
+
+Phát biểu bài toán: Đánh giá hiệu quả của mô hình dựa trên tập quan sát D
+Đánh giá: tự động ít cần con người
+Chọn chiến lược và độ đo đánh giá cần thiết.
+
+MỘT VÀI CHIẾN LƯỢC ĐÁNH GIÁ
+- Những chiến lược này dùng rất nhiều trong thống kê rồi giờ ta sẽ áp dụng sang ML và bài toán thực tế
+- Hold out
+- Stratified sampling
+- Repeated hold out
+- Cross-validation:
+	+ K-fold
+	+ Leave-one-out
+- Bootstrap sampling
+
+1. Hold out (random splitting)
+Chia đôi thôi
+CHia tập D thành 2 nửa ngẫu nhiên không giao nhau: 1 tập lớn là D_Train dùng để huấn luyện mô hình, D_test dùng cho mô hình sau khi huấn luyện để đo đạc kết quả của mô hình
+
+Thường người ta chia theo 2/3 train và 1/3 test
+
+[!] this technique is suitable when D is of large size
+vd: khi ta so sánh 
+6/10 và 6k/10k: khi ta cho mô hình dự đoán trên kết quả 6/10 thì nó sẽ hoàn toàn sai lệch nếu gặp nhiễu lỗi (ảnh 1)
+
+Tập train và tập test không phân bố đều ở các lớp phân loại
+vd: ta có 2 lớp mà tập train hoàn toàn vào lớp 2 còn tập test hoàn toàn vào lớp 1 dẫn đến mô hình có độ chính xác 0% (ảnh 2)
+2. Stratified sampling: lấy mẫu phân tầng
+giải quyết việc chia dữ liệu các lớp chia vào các tập không đều, cải tiến của chia đôi
+
+=> Chia đôi theo từng lớp: với mỗi lớp chia đôi 1 phần vào lớp train, 1 phần vào lớp test
+
+=> Áp dụng khi làm việc với bài toán phân loại, không áp dụng được cho bài toán hồi quy hoặc học không giám sát 
+
+Nhược điểm: Trường hợp mẫu bé 6/10 => Nhiễn có th thể ảnh hưởng nhiều đến kq ta đánh giá
+
+3. Rêpated hold out
+(ảnh3)
+Lặp lại chia nhiều lần, rồi lấy trung bình kết quả
+
+2 lần lặp khác nhau thì cách chia phải khác nhau
+
+Về mặt thống kê người ta chứng minh được rằng ta thử n lần rồi lấy trung bình n kết quả đó thì kết quả tiến đến kết quả thực của hệ thống (lấy lặp từ 30-100 lần)
+
+Nhược điểm tốn thời gian
+Mới giải quyết được trường hợp mẫu bé, còn trường hợp chia lệch lớp chưa giải quyết được
+
+=> Lấy mẫu phân tầng giải quyết được trường hợp chia lệch
+=> Kết hợp 2 phương pháp giải quyết được nhược điểm đó
+
+4. Cross validation: (đánh giá chéo)
+Trong phương pháp lặp đi lặp lại thì 2 tập train hoặc test có thể lặp đi lặp lại rất nhiều lần nó có thể dư thừa
+
+=> Phương pháp K-fold cross validation:
+- Chia tập ban đầu thành K phần không giao nhau
+- Thực hiện K lần chạy (Folds): tại mỗi lần chạy lấy 1 phần lưu vào tập test, những phần còn lại cho vào tập huấn luyện,
+Cứ lặp đi lặp lại cho K lần khác nhau 
+- Cuối cùng lấy trung bình K lần khác nhau đấy xem là kết quả chung
+
+Trong thực tế người ta thường chọn k=10 hay k=5
+Có thể kết hợp với lấy mẫu phân tầng nếu ta làm việc với bài toán phân loại 
+(mỗi lớp chia ra k phần sau lấy tập test của tầng này kết hợp với tậpp test của tầng kia để ra tập test và tập train cũng vậy)
+
+Chọn k thông thường chọn: 10 hoặc 5
+
+Phương pháp phù hợp với dữ liệu vừa và bé: vì dữ liệu lớn tốn nhiều thời gian chạy 
+
+* Leave-on-out cross validation: 
+Một trường hợp đặc biệt của đánh giá chéo
+
+Khi ta gặp 1 tập dữ liệu rất bé ta chia dữ liệu thành số phần đúng bằng số phần tử trong tập dữ liệu
+=> Tập test 1 phần tử
+
+Không có ngẫu nhiên gì trong đó
+Phù hợp với tập dữ liệu rất bé, tập dữ liệu vừa sẽ rất tốn kém thời gian
+
+5. Bootstrap sampling
+
+Một mô hình có thể tốt hơn khi dữ liệu càng nhiều, khi mà ta chia train test thì có thể ảnh hưởng đến kết quả  => Dùng bootstrap
+
+- Làm tập huấn luyện = tập D ban đầu
+- D= D_train lấy ngẫu nhiên có trùng lặp
+- D_test = D\D_train
+
+Tập train cỡ không giảm đi, phù hợp với tập dữ liệu nhỏ
+=> Trong thực tế đôi khi dùng
+Đánh giá chéo và chia đôi hay dùng
+
+=============================
+# MODEL SELECTION
+
+SVM: C
+Ridge regression: Lamda
+
+Làm sao chọn hệ số hiệu chỉnh tốt
+
+T_valid: đánh giá mô hình T_valid giống T_test nhưng T_valid để ta đi thử tham số
+
+T_valid : ta thử lamda cho tập huấn luyện mỗi D_train và Lamda rồi so với Tvalid sài P (độ đo P) để đánh giá
+sau đó lấy Lamda* là tốt nhất (nhận best P)
+
+Sau đó huấn luyện hàm học trên toàn bộ tập D với lamda* đó để lấy hàm khái quát hoá tốt nhất
+(xem lại MODEL SELECTION)
+
+
+Nguồn: https://www.youtube.com/watch?v=ujDDwR2GZZM&list=PLaKukjQCR56ZRh2cAkweftiZCF2sTg11_&index=9&ab_channel=Th%C3%A2nQuangKho%C3%A1t

@@ -1,0 +1,11 @@
+Precision
+
+Precision for class Ci
+- percentage of corect instances, among all that are asigned to ci
+
+Precision(ci) = TPi/(TPi + FPi)
+
+.TPi the number of instances that are assigned correctly to class ci
+.FPi: the number of instances that are assigned incorrectly to class ci
+
+Hiểu nôm la thì nó giống accuray cho lớp ci thôi

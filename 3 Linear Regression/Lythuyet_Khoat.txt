@@ -1,0 +1,17 @@
+f(x) = w0 + w1x1 + w2x2 + ... + wnxn
+
+wo: bias, giúp hàm f nó khái quát hơn, nếu bỏ đi thì hàm f đi qua gốc toạ độ
+
+w1, w2 ... là trọng số: càng cao thì càng ảnh hưởng đến f
+=====
+Lẻning a linear model is equivalent to learning the coeffient vector w = (w0,w1, ...)
+
+Mục tiêu quan trọng nhất của học máy là giúp chúng ta tìm ra một cái hàm f mà nó mô tả khái quát tốt nhất tập dữ liệu
+
+Khi chúng ta có hàm lỗi loss function mse = (y_mũ -y_dự_đoán)^2, ta đi dùng nó để huấn luyện mô hình
+
+Phát biểu lại bài toán: đi tìm hàm f khái quát hoá bộ dữ liệu là đi xây mô hình hồi quy hay đi tìm các trọng số w của nó, sao cho cái hàm lỗi của nó là bé nhất
+
+tìm bộ w để hàm lỗi của nó là bé nhất
+
+Bài toán hàng triệu chiều không hiếm: ảnh văn bản

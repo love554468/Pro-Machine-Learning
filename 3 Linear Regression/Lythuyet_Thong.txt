@@ -1,0 +1,27 @@
+Bài toán giá nhà cụ thể là hàm phi tuyến không phải tuyến tính
+(Mặt đường, tầng, góc cạnh mét vuông, ...)
+
+Để giải quyết bài toán này ta phải xây dựng một cái tập mẫu
+vd đi khảo sát nhà 1: x1, nhà 2: x2, ...
+
+Để giải bài toán này tức là ta đi giải hệ phương trình tuyến tính với 
+n phương trình và cần tìm ra bộ nghiệm w1,w2,w3, .. sao cho cái sai số dự đoán với thực tế sai khác ít nhất
+
+w là 1 vector x1, x2, ..xn là 1 matrix
+
+import numpy as np
+
+X = np.array([[50,3,10], [60,3,5], [100,4,15], [120,4,5]]) # ma trận các quan sát là các quan sát về DienTich, SoPhong, KhoangCachTT
+y = np.arraqy([[1.4,2,2,5]]).T # giá nhà khảo sát thực tế đơn vị tỉ đồng
+# .T là chuyển vị
+
+one = np.ones((X.shape[0], 1)) # ma trận 4*1 toàn 1
+X_ngang = np.concatenate((one), axis=1) # nối X và one thành ma trận 4*4 theo chiều dọc mà
+
+def grad(w)
+....
+Lỗi
+====
+Một số cải tiến của thuật toán gradient:
+thuật toán momentum: đà (1)
+Phương pháp NAG: cải tiến (1)

@@ -1,0 +1,56 @@
+MODEL SELECTION tiếp
+
+
+Model selection: là cách mình lựa tham số để cho việc huấn luyện mô hình
+Mình sẽ chia tập D thành D_train và T_valid để lựa tham số cho mô hình
+D_train thì hiểu như bình thường là tập huấn luyện, T_valid là tập test để giúp tính độ chính xác mô hình, rồi từ đó chọn được tham số lam da phù hợp
+
+Model selection using hold-out
+Sử dụng chiến lược hold out để huấn luyện mô hình
+b1. ban đầu ta chia tập train và test
+b2. Với mỗi lamda ta sẽ lấy được một kết quả P_lamda là độ chính xác
+b3. Lấy lamda với P_lamda tốt nhất (độ chính xác tốt nhất)
+
+Rồi có thể thay thế chiến lược hold out bằng cross validation (ảnh 4)
+
+Một ví dụ về lựa chọn tham số hay v: (ảnh 5) phút 21
+=============================
+4. MODEL ASESSMENT AND SELECTION
+Cho tập quan sát D, chúng ta cần lựa chọn tham số tốt nhất và đánh giá tổng thể hiệu suất của mô hình
+
+Nếu không lựa tham số tốt nhất mà sài mặc định thì nó chả có ý nghĩa gì
+
+Quan trọng: Ảnh 6 là cách làm
+Chọn tập S cũng là một vấn đề, ta sẽ phải thử nghiệm và tuỳ theo domain hoặc kinh nghiệm của ta để chọn cho hợp lý (tập S là tập lamda tham số để ta pick vào mô hình - rất là tốn công)
+
+
+Chiến lược Bootrap sampling: dùng khi tập dữ liệu quá bé
+Dữ liệu lớn hay vừa các chiến lược khác phù hợp hơn
+
+ĐỐi với Dữ liệu lệch nhãn rất nhiều ta sài các chiến lược nào, kết hợp các chiến lược bla bla
+
+=============================
+5. ĐỘ ĐO PERFORMANCE MEASURES
+Độ đo mỗi bài toán mỗi yêu cầu sẽ có 1 độ đo ta có thể xem sét xử dụng
+Đối với bài toán phân loại, bài toán hồi quy, yêu cầu thời gian,  ... 
+
+ảnh 7
+=====
+ACCURACY
+Bài toán phân loại (classification) : phán đoán đúng trên toàn bộ phán đoán
+Bài toán hồi quy: MAE, MSE, RMSE
+Bài toán phân loại có 2 độ đo khác hay dùng: Precision and Recall
+(ảnh8, 9)
++	precision: độ chính xác (file Precision.txt)
++	recall
+Miccro average: độ chính xác cho từng phán đoán trung bình
+Macro averaging: độ chính xác trung bình cho từng lớp
+
+F1: tổng hợp 2 độ đo
+đặc trung của hàmn trung bình điều hoà, trung bình số học bình thường không có ý nghĩa lắm
+
+Ví dụ ảnh 11
+======
+Kết luận:
+dựa vào độ chính xác giúp ta cải thiện và so sánh mô hình
+Bài 9 sẽ bàn luận việc làm thế nào để có thể đánh giá hiệu quả của một mô hình học máy (model assessment) một cách tin cậy. Đánh giá là một bước không thể thiếu khi xây dựng bất kỳ ứng dụng Học máy nào. Bài giảng cũng trình bày vấn đề lựa chọn (siêu) tham số (model selection), một bước không thể tránh nếu muốn việc đánh giá của ta là chuẩn và nếu ta muốn xây dựng một hệ thống có hiệu quả cao.
